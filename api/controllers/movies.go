@@ -15,3 +15,18 @@ func GetMoviesHandler(c *fiber.Ctx) error {
 	}
 	return c.JSON(movies)
 }
+
+func CreateMovieHandler(c *fiber.Ctx) error {
+	s := services.GetServices(c)
+	m := models.NewMovies(s)
+	movie := &models.Movie{}
+	if err := c.BodyParser(movie); err != nil {
+		s.Logger.Println(err)
+		return c.SendStatus(400)
+	}
+	if err := m.Create(movie); err != nil {
+		s.Logger.Println(err)
+		return c.SendStatus(500)
+	}
+	return c.JSON(movie)
+}

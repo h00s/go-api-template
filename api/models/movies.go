@@ -36,3 +36,12 @@ func (m *Movies) FindAll() ([]Movie, error) {
 
 	return movies, nil
 }
+
+func (movies *Movies) Create(m *Movie) error {
+	_, err := movies.services.DB.Conn.Exec(context.Background(), sql.CreateMovie, m.Title, m.ReleaseYear, m.Director, m.Rating)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
