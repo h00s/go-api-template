@@ -7,7 +7,7 @@ import (
 )
 
 func GetMoviesHandler(c *fiber.Ctx) error {
-	m := models.NewMovies(services.GetServices(c))
+	m := models.GetModels(c).Movies
 	movies, err := m.FindAll()
 	if err != nil {
 		services.GetServices(c).Logger.Println(err)
@@ -18,7 +18,7 @@ func GetMoviesHandler(c *fiber.Ctx) error {
 
 func CreateMovieHandler(c *fiber.Ctx) error {
 	s := services.GetServices(c)
-	m := models.NewMovies(s)
+	m := models.GetModels(c).Movies
 	movie := &models.Movie{}
 	if err := c.BodyParser(movie); err != nil {
 		s.Logger.Println(err)
