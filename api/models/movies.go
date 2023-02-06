@@ -3,8 +3,8 @@ package models
 import (
 	"context"
 
-	"github.com/h00s/go-api-template/api/services"
 	"github.com/h00s/go-api-template/db/sql"
+	"github.com/h00s/go-api-template/services"
 )
 
 type Movies struct {
